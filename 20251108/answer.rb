@@ -1,3 +1,3 @@
 def filter_and_sum(array)
-  array.select { |n| n.even? }.sum
+  array.select(&:even?).sum
 end
