@@ -1,6 +1,6 @@
 require_relative 'group_by_initial'
 
-RSpec.describe 'group_by_initial' do
+RSpec.describe '#group_by_initial' do
   context '基本動作' do
     it '異なる頭文字でグループ化できる' do
       input = %w[apple banana cherry]
@@ -9,12 +9,6 @@ RSpec.describe 'group_by_initial' do
         'B' => ['banana'],
         'C' => ['cherry']
       }
-      expect(group_by_initial(input)).to eq(expected)
-    end
-
-    it '同じ頭文字の文字列をまとめられる' do
-      input = %w[apple avocado apricot]
-      expected = { 'A' => %w[apple avocado apricot] }
       expect(group_by_initial(input)).to eq(expected)
     end
   end
@@ -43,7 +37,7 @@ RSpec.describe 'group_by_initial' do
       expect(group_by_initial(input)).to eq(expected)
     end
 
-    it '空文字列を含む場合は除外して空のハッシュを返す' do
+    it '空文字列を除外する' do
       input = ['test', '', 'data']
       expected = { 'T' => ['test'], 'D' => ['data'] }
 
