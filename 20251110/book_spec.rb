@@ -33,4 +33,48 @@ RSpec.describe 'Book' do
       expect(book.info).to eq("「#{title}」#{author}(¥#{price})")
     end
   end
+
+  describe '#discount' do
+    context 'with normal discount ratio' do
+      it 'returns original price with 0% discount' do
+        expect(book.discount(0)).to eq(price)
+      end
+
+      it 'returns the half price with 50% discount' do
+        expect(book.discount(50)).to eq(price * 0.5)
+      end
+
+      it 'returns zero with 100% discount' do
+        expect(book.discount(100)).to eq(0)
+      end
+
+      it 'round down' do
+        book = Book.new(title, author, 20)
+
+        expect(book.discount(33)).to eq(13)
+      end
+    end
+
+    context 'with abnormal discount ratio' do
+      it 'raise arugment error with 101% discount' do
+        expect { book.discount(101) }.to raise_error(ArgumentError)
+      end
+
+      it 'raise argument error with -1% discount' do
+        expect { book.discount(-1) }.to raise_error(ArgumentError)
+      end
+    end
+  end
+
+  describe '#published?' do
+    it 'returns true if published_at is set' do
+      book = Book.new(title, author, price, Date.new(2024, 1, 1))
+
+      expect(book.published?).to be(true)
+    end
+
+    it 'returns false if published_at is nil' do
+      expect(book.published?).to be(false)
+    end
+  end
 end

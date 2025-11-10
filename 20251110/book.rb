@@ -13,4 +13,14 @@ class Book
   def info
     "「#{@title}」#{@author}(¥#{@price})"
   end
+
+  def discount(percent)
+    raise ArgumentError if percent.negative? || 100 < percent
+
+    price * (100 - percent) / 100
+  end
+
+  def published?
+    !!@published_at
+  end
 end
