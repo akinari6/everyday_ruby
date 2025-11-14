@@ -1,5 +1,5 @@
 def get_user_name(user)
-  user.fetch(:name, nil)
+  user.fetch(:name, "名前未設定")
 end
 
 def get_nested_value(data)
@@ -7,7 +7,8 @@ def get_nested_value(data)
 end
 
 def add_tag(user, tag)
-  user[:tags] ||= tag
+  user[:tags] ||= []
+  user[:tags] << tag
 end
 
 user1 = { name: "田中太郎", age: 25 }
