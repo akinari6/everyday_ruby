@@ -10,9 +10,9 @@ def high_value_customer_names(orders, threshold)
 end
 
 def average_completed_order_amount(orders)
-  return 0.0 if orders.empty?
-  
   completed_orders = orders.select { |order| order[:status] == :completed }
+  return 0.0 if completed_orders.empty?
+  
   completed_orders.map { |order| order[:amount] }.sum.to_f / completed_orders.size
 end
 
